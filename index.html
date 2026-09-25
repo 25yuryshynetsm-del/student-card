@@ -1,25 +1,152 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="uk">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Сайт-візитка студента</title>
   <style>
-    body { font-family: sans-serif; margin: 40px; background: #f7fafc; color: #111827; }
-    .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 15px; }
-    h1 { color: #2563eb; }
-    button { padding: 8px 16px; background: #2563eb; color: white; border: none; border-radius: 4px; cursor: pointer; }
+    :root {
+      --bg: #f7fafc;
+      --card: #ffffff;
+      --accent: #2563eb;
+      --muted: #6b7280;
+    }
+    body {
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif;
+      margin: 0;
+      background: var(--bg);
+      color: #111827;
+    }
+    .container {
+      max-width: 900px;
+      margin: 48px auto;
+      padding: 24px;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+    nav a {
+      margin-left: 12px;
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    nav a:hover {
+      color: var(--accent);
+    }
+    .card {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: 0 6px 18px rgba(16, 24, 40, 0.06);
+    }
+    .actions {
+      margin-top: 16px;
+      display: flex;
+      gap: 8px;
+    }
+    button {
+      border: 0;
+      padding: 10px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-ghost {
+      background: transparent;
+      color: var(--muted);
+    }
+    footer {
+      margin-top: 28px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    pre {
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 12px;
+      border-radius: 8px;
+      overflow: auto;
+    }
   </style>
 </head>
 <body>
-  <div class="card">
-    <h1>Сайт-візитка студента</h1>
-    <p>Вітаю на моєму сайті! Це навчальний проект.</p>
-    <button onclick="alert('Привіт! Все працює!')">Натисни мене</button>
+  <div class="container">
+    <header>
+      <h1>Сайт-візитка студента</h1>
+      <nav>
+        <a href="#welcome">Головна</a>
+        <a href="#about">Про мене</a>
+        <a href="#contact">Контакти</a>
+      </nav>
+    </header>
+
+    <main style="margin-top: 18px;">
+      <!-- Секція Привітання -->
+      <section class="card" id="welcome">
+        <h2>Вітаю на моєму сайті! 👋</h2>
+        <p style="color: var(--muted)">Я студент(ка) і це мій персональний сайт-візитка, створений в рамках навчального завдання.</p>
+        <div class="actions">
+          <button class="btn-primary" id="greetBtn">Привітатися</button>
+          <button class="btn-ghost" id="showCode">Показати корисний фрагмент</button>
+        </div>
+        <div id="output" style="margin-top: 14px;"></div>
+      </section>
+
+      <!-- Секція Про мене -->
+      <section class="card" style="margin-top: 18px;" id="about">
+        <h3>Про мене</h3>
+        <p style="color: var(--muted)">
+          <b>Спеціальність:</b> Інформаційні технології / Комп'ютерні науки<br>
+          <b>Курс:</b> 2 курс<br>
+          <b>Захоплення:</b> Веб-розробка, програмування, вивчення нових технологій та дизайн.
+        </p>
+      </section>
+
+      <!-- Секція Контакти -->
+      <section class="card" style="margin-top: 18px;" id="contact">
+        <h3>Зв'язок зі мною</h3>
+        <p style="color: var(--muted)">
+          Якщо ви хочете зі мною зв'язатися або обговорити навчальний проєкт:
+        </p>
+        <pre id="codePreview" style="display: none;">Email: student@example.com
+Telegram: @student_nickname
+GitHub: github.com/student</pre>
+      </section>
+    </main>
+
+    <footer>
+      <small>Завантажено: <span id="now"></span></small>
+    </footer>
   </div>
-  <div class="card">
-    <h2>Про мене</h2>
-    <p>Студентка 2 курсу. Вивчаю веб-розробку.</p>
-  </div>
+
+  <script>
+    // Відображення поточної дати та часу
+    document.getElementById('now').textContent = new Date().toLocaleString();
+
+    // Кнопка привітання
+    document.getElementById('greetBtn').addEventListener('click', function() {
+      const out = document.getElementById('output');
+      out.innerHTML = '<strong>Радий(а) знайомству!</strong> Дякую, що завітали на мою сторінку!';
+    });
+
+    // Кнопка для відображення контактного блоку
+    document.getElementById('showCode').addEventListener('click', function() {
+      const pre = document.getElementById('codePreview');
+      pre.style.display = pre.style.display === 'none' ? 'block' : 'none';
+    });
+  </script>
 </body>
-</html>
+</html> 
